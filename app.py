@@ -2,7 +2,6 @@ from os import path, environ
 import json
 from flask import Flask, Blueprint, abort, jsonify, request, session
 import settings
-from modules import myapi
 from celery import Celery
 from tasks import add
 
