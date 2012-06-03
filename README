@@ -1,0 +1,14 @@
+A simple example for the latest version of Celery (2.6.0rc4 as of this example)
+
+
+In your project directory start celery: 
+
+python tasks.py worker --loglevel=debug
+
+then start the application:
+
+python app.py
+
+<optional> then run the testing script
+
+python outside_test.py 

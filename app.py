@@ -3,29 +3,11 @@ import json
 from flask import Flask, Blueprint, abort, jsonify, request, session
 import settings
 from modules import myapi
-from flask.ext.celery import Celery
-
+from celery import Celery
+from tasks import add
 
 app = Flask(__name__)
 app.config.from_object(settings)
-
-
-app.register_blueprint(myapi.blueprint)
-
-def register_api(view, endpoint, url, pk ='id', pk_type='int'):
-    view_func = view.as_view(endpoint)
-    app.add_url_rule(url, defaults={pk: None}, view_func=view_func, methods=['GET',])
-    app.add_url_rule(url, view_func=view_func, methods=['POST',])
-    app.add_url_rule('{0}<{1}:{2}>'.format(url, pk_type, pk), view_func=view_func,
-                     methods=['GET', 'PUT', 'DELETE'])
-
-register_api(myapi.MyAPI, 'my_api', '/my_api/', 'resource_tag', pk_type='string')
-
-celery = Celery(app)
-
-@celery.task(name="myapp.add")
-def add(x, y):
-    return x + y
 
 @app.route("/test")
 def hello_world(x=16, y=16):
