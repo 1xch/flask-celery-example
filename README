@@ -1,13 +1,15 @@
-A simple example for the latest version of Celery (v3.1.0rc1 as of this example)
+A simple example for Flask with Celery
 
-In your project directory start celery: 
+see: http://flask.pocoo.org/docs/patterns/celery/
 
-    celery worker --app=tasks -l debug
+In this project directory start celery: 
+
+     celery -A app.celery worker&
 
 then start the application:
 
-    python app.py
+    python app.py&
 
-<optional> then run the testing script
+<optional> then run the example script
 
-        python external_test.py 
+    python example.py 
